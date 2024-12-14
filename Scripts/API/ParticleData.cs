@@ -1,13 +1,11 @@
 using System.Numerics;
 
-namespace Fluid.API;
+namespace Simulator.API;
 
 class ParticleData {
     public int Radius;
     public Vector2 Position;
     public Vector2 Velocity;
-
-    private const float DampingFactor = 0.5f;
 
     public ParticleData(int radius, Vector2 position, Vector2 velocity) {
         Radius = radius;
@@ -16,7 +14,7 @@ class ParticleData {
     }
 
     public void Update() {
-        Velocity += new Vector2(0, 0.5f);
+        Velocity += Settings.Gravity;
         Position += Velocity;
 
         CheckCollision();
@@ -35,13 +33,12 @@ class ParticleData {
 
         // Reflect the particle if it hits the bounding box
         if (Math.Abs(position.X) + Radius + Theme.BoundingBoxThickness > halfBoundingSize.X) {
-            Velocity.X *= -1.0f * DampingFactor;
+            Velocity.X *= -1.0f * Settings.DampingFactor;
             Position.X = signX * (halfBoundingSize.X - Radius - Theme.BoundingBoxThickness) + Theme.ScreenWidth / 2;
         }
         if (Math.Abs(position.Y) + Radius + Theme.BoundingBoxThickness > halfBoundingSize.Y) {
-            Velocity.Y *= -1.0f * DampingFactor;
+            Velocity.Y *= -1.0f * Settings.DampingFactor;
             Position.Y = signY * (halfBoundingSize.Y - Radius - Theme.BoundingBoxThickness) + Theme.ScreenHeight / 2;
         }
-        
     }
 }

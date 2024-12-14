@@ -1,6 +1,6 @@
-﻿namespace Fluid.App;
+﻿namespace Simulator.App;
 
-using Fluid.API;
+using Simulator.API;
 using Raylib_cs;
 
 public static class Program {

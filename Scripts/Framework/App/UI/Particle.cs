@@ -1,7 +1,8 @@
-namespace Fluid.App;
+namespace Simulator.App;
 
-using Fluid.API;
+using Simulator.API;
 using Raylib_cs;
+using System.Numerics;
 
 class Particle {
     private ParticleData data;
@@ -9,6 +10,10 @@ class Particle {
     public Particle(ParticleData data) {
         this.data = data;
     }
+
+    public Vector2 Position => data.Position;
+    public Vector2 Velocity => data.Velocity;
+    public float Radius => data.Radius;
 
     public void Update() {
         data.Update();
